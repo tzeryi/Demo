@@ -22,12 +22,14 @@ Ext.define('LineChartDemo.view.MyViewport', {
         'Ext.grid.Panel',
         'Ext.view.Table',
         'Ext.grid.column.Column',
+        'Ext.tab.Panel',
         'Ext.chart.CartesianChart',
         'Ext.chart.axis.Category',
         'Ext.chart.axis.Numeric',
         'Ext.chart.series.Line',
         'Ext.chart.Legend',
-        'Ext.XTemplate'
+        'Ext.XTemplate',
+        'Ext.tab.Tab'
     ],
 
     viewModel: {
@@ -83,129 +85,192 @@ Ext.define('LineChartDemo.view.MyViewport', {
             ]
         },
         {
-            xtype: 'panel',
+            xtype: 'tabpanel',
             region: 'center',
-            border: false,
-            layout: 'fit',
-            title: 'Triangle Chart',
+            activeTab: 0,
             items: [
                 {
-                    xtype: 'cartesian',
+                    xtype: 'panel',
                     border: false,
-                    colors: [
-                        '#115fa6',
-                        '#94ae0a',
-                        '#a61120',
-                        '#ff8809',
-                        '#ffd13e',
-                        '#a61187',
-                        '#24ad9a',
-                        '#7c7474',
-                        '#a66111'
-                    ],
-                    insetPadding: {
-                        top: 20,
-                        left: 20,
-                        right: 20,
-                        bottom: 20
-                    },
-                    store: 'MyJsonStore',
-                    innerPadding: {
-                        top: 20,
-                        left: 20,
-                        right: 20,
-                        bottom: 20
-                    },
-                    axes: [
+                    layout: 'fit',
+                    title: 'Triangle Chart',
+                    items: [
                         {
-                            type: 'category',
-                            fields: [
-                                'waferId'
-                            ],
-                            grid: false,
-                            label: {
-                                rotate: {
-                                    degrees: -45
+                            xtype: 'cartesian',
+                            border: false,
+                            insetPadding: {
+                                top: 20,
+                                left: 20,
+                                right: 100,
+                                bottom: 20
+                            },
+                            store: 'MyJsonStore',
+                            innerPadding: {
+                                top: 20,
+                                left: 20,
+                                right: 20,
+                                bottom: 20
+                            },
+                            axes: [
+                                {
+                                    type: 'category',
+                                    fields: [
+                                        'waferId'
+                                    ],
+                                    grid: false,
+                                    label: {
+                                        rotate: {
+                                            degrees: -45
+                                        }
+                                    },
+                                    position: 'bottom'
+                                },
+                                {
+                                    type: 'numeric',
+                                    fields: [
+                                        'ex',
+                                        'ey',
+                                        'tx',
+                                        'ty'
+                                    ],
+                                    grid: true,
+                                    position: 'left'
                                 }
-                            },
-                            position: 'bottom'
-                        },
-                        {
-                            type: 'numeric',
-                            fields: [
-                                'ex',
-                                'ey',
-                                'tx',
-                                'ty'
                             ],
-                            grid: true,
-                            position: 'left'
-                        }
-                    ],
-                    series: [
-                        {
-                            type: 'line',
-                            highlight: {
-                                fillStyle: '#000',
-                                radius: 5,
-                                lineWidth: 2,
-                                strokeStyle: '#fff'
-                            },
-                            marker: {
-                                type: 'circle',
-                                radius: 4
-                            },
-                            style: {
-                                lineWidth: 3
-                            },
-                            title: 'Ex',
-                            tooltip: {
-                                trackMouse: true,
-                                style: 'background: #fff',
-                                showDelay: 0,
-                                dismissDelay: 0,
-                                hideDelay: 0,
-                                renderer: function (record, ctx) {
-                                    var waferId = record.get('waferId');
-                                    var modelName = ctx.series.getYField();
-                                    this.setHtml('Wafer ID : ' + waferId + '<BR/>' + modelName + ': ' + record.get(modelName));
+                            series: [
+                                {
+                                    type: 'line',
+                                    highlight: {
+                                        fillStyle: '#000',
+                                        radius: 5,
+                                        lineWidth: 2,
+                                        strokeStyle: '#fff'
+                                    },
+                                    highlightCfg: {
+                                        scaling: 2
+                                    },
+                                    marker: {
+                                        type: 'circle',
+                                        radius: 4
+                                    },
+                                    style: {
+                                        lineWidth: 3
+                                    },
+                                    title: 'Ex',
+                                    tooltip: {
+                                        trackMouse: true,
+                                        style: 'background: #fff',
+                                        showDelay: 0,
+                                        dismissDelay: 0,
+                                        hideDelay: 0,
+                                        renderer: function (record, ctx) {
+                                            var waferId = record.get('waferId');
+                                            var modelName = ctx.series.getYField();
+                                            this.setHtml('Wafer ID : ' + waferId + '<BR/>' + modelName + ': ' + record.get(modelName));
+                                        }
+                                    },
+                                    xField: 'waferId',
+                                    yField: [
+                                        'ex'
+                                    ]
+                                },
+                                {
+                                    type: 'line',
+                                    marker: {
+                                        type: 'triangle'
+                                    },
+                                    title: 'Ey',
+                                    tooltip: {
+                                        trackMouse: true,
+                                        style: 'background: #fff',
+                                        showDelay: 0,
+                                        dismissDelay: 0,
+                                        hideDelay: 0,
+                                        renderer: function (record, ctx) {
+                                            var waferId = record.get('waferId');
+                                            var modelName = ctx.series.getYField();
+                                            this.setHtml('Wafer ID : ' + waferId + '<BR/>' + modelName + ': ' + record.get(modelName));
+                                        }
+                                    },
+                                    xField: 'waferId',
+                                    yField: [
+                                        'ey'
+                                    ]
+                                },
+                                {
+                                    type: 'line',
+                                    marker: {
+                                        type: 'circle',
+                                        radius: 4
+                                    },
+                                    title: 'Tx',
+                                    tooltip: {
+                                        trackMouse: true,
+                                        style: 'background: #fff',
+                                        showDelay: 0,
+                                        dismissDelay: 0,
+                                        hideDelay: 0,
+                                        renderer: function (record, ctx) {
+                                            var waferId = record.get('waferId');
+                                            var modelName = ctx.series.getYField();
+                                            this.setHtml('Wafer ID : ' + waferId + '<BR/>' + modelName + ': ' + record.get(modelName));
+                                        }
+                                    },
+                                    xField: 'waferId',
+                                    yField: [
+                                        'tx'
+                                    ],
+                                    smooth: 3
                                 }
-                            },
-                            xField: 'waferId',
-                            yField: [
-                                'ex'
-                            ]
-                        },
-                        {
-                            type: 'line',
-                            marker: {
-                                type: 'triangle'
-                            },
-                            title: 'Ey',
-                            xField: 'waferId',
-                            yField: [
-                                'ey'
-                            ]
-                        },
-                        {
-                            type: 'line',
-                            title: 'Tx',
-                            xField: 'waferId',
-                            yField: [
-                                'tx'
                             ],
-                            smooth: 3
+                            legend: {
+                                xtype: 'legend',
+                                docked: 'bottom',
+                                tpl: [
+                                    '<div class="x-legend-container"><tpl for="."> <div class="myLegendItem" style="float:left;margin:5px;padding:0px;cursor:pointer;"> <div class="" style="float:left;margin:2px;width:10px;height: 10px; background:{mark};opacity:.6"></div><div style="float:left;">{name}</div></div></tpl> </div>'
+                                ],
+                                itemSelector: '.myLegendItem',
+                                store: 'MyJsonStore'
+                            }
                         }
-                    ],
-                    legend: {
-                        xtype: 'legend',
-                        docked: 'bottom',
-                        tpl: [
-                            '<div class="x-legend-container"><tpl for="."> <div class="myLegendItem" style="float:left;margin:5px;padding:0px;cursor:pointer;"> <div class="" style="float:left;margin:2px;width:10px;height: 10px; background:{mark};opacity:.6"></div><div style="float:left;">{name}</div></div></tpl> </div>'
-                        ],
-                        itemSelector: '.myLegendItem',
-                        store: 'MyJsonStore'
-                    }
+                    ]
+                },
+                {
+                    xtype: 'panel',
+                    title: 'Raw Data',
+                    items: [
+                        {
+                            xtype: 'gridpanel',
+                            store: 'MyJsonStore',
+                            columns: [
+                                {
+                                    xtype: 'gridcolumn',
+                                    dataIndex: 'waferId',
+                                    text: 'Wafer Id'
+                                },
+                                {
+                                    xtype: 'gridcolumn',
+                                    dataIndex: 'ex',
+                                    text: 'Ex'
+                                },
+                                {
+                                    xtype: 'gridcolumn',
+                                    dataIndex: 'ey',
+                                    text: 'Ey'
+                                },
+                                {
+                                    xtype: 'gridcolumn',
+                                    dataIndex: 'tx',
+                                    text: 'Tx'
+                                },
+                                {
+                                    xtype: 'gridcolumn',
+                                    dataIndex: 'ty',
+                                    text: 'Ty'
+                                }
+                            ]
+                        }
+                    ]
                 }
             ]
         }
