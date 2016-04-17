@@ -1,0 +1,46 @@
+{
+	'data': [{
+		waferId: 'NA51203.01',
+		ex: 10,
+		ey: 5,
+		tx: 11,
+		ty: 0
+	},{
+		waferId: 'NA51203.02',
+		ex: 9,
+		ey: 3,
+		tx: 10,
+		ty: -1
+	},{
+		waferId: 'NA51203.03',
+		ex: 12,
+		ey: 6,
+		tx: 13,
+		ty: 2
+	},{
+		waferId: 'NA51203.04',
+		ex: 16,
+		ey: 11,
+		tx: 16,
+		ty: 5
+	},{
+		waferId: 'NA51203.05',
+		ex: 16,
+		ey: 11,
+		tx: 16,
+		ty: 5
+	},{
+		waferId: 'NA51203.06',
+		ex: 16,
+		ey: 11,
+		tx: 16,
+		ty: 5
+	},{
+		waferId: 'NA51203.07',
+		ex: 16,
+		ey: 11,
+		tx: 16,
+		ty: 5
+	}
+	]
+}
